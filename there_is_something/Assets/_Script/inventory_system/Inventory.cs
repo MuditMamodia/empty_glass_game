@@ -59,4 +59,17 @@ public class Inventory
         Debug.Log("Item not found in inventory: " + item.itemName);
         return false; // ❌ item not found
     }
+
+    public bool HasItem(inventory_holder item)
+    {
+        foreach (var slot in slots)
+        {
+            if (slot.itemName == item && slot.quantity > 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

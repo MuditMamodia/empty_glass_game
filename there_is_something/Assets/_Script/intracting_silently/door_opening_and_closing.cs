@@ -44,6 +44,8 @@ public class door_opening_and_closing : MonoBehaviour, horror_silent_scripting
     private Vector3 uiBaseScale = Vector3.one;
     private Vector3 uiTargetScale = Vector3.zero;
 
+    public locked_door lockedDoor;
+
     private void Awake()
     {
         door = transform;
@@ -109,6 +111,15 @@ public class door_opening_and_closing : MonoBehaviour, horror_silent_scripting
     // KeyDown — single tap starts a FAST open/close immediately.
     public void Interactable()
     {
+        if (lockedDoor != null)
+        {
+            if (!lockedDoor.TryUnlock())
+            {
+                Debug.Log("Door is locked");
+                return;
+            }
+        }
+
         pressStartTime = Time.time;
         isInHoldMode = false;
 
