@@ -26,8 +26,8 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0.0056497455
-          inSlope: 0.6852558
-          outSlope: 0.6852558
+          inSlope: 0.8743077
+          outSlope: 0.8743077
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -348,10 +348,10 @@ MonoBehaviour:
     m_Value: 0.52
   contrast:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 25.6
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0.990566, g: 0.93648857, b: 0.87375396, a: 1}
   hueShift:
     m_OverrideState: 1
     m_Value: -2
