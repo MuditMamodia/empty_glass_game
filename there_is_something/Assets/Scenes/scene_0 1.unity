@@ -5952,7 +5952,7 @@ GameObject:
   - component: {fileID: 1083471949}
   - component: {fileID: 1083471950}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6066,7 +6066,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8128916c08a24ac479ed3b297c5c9a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::first_Person_Movement
-  speed: 5
+  walkSpeed: 2.6
+  sprintSpeed: 4.6
+  speedAcceleration: 12
+  sprintKey: 304
   mouseSensitivity: 3
   cameraHolder: {fileID: 2134183885}
 --- !u!54 &1083471950
@@ -6093,9 +6096,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!1 &1095731675 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5072916901432009992, guid: c0e15296cb985194e9b2b4f000aa2564, type: 3}
@@ -10819,6 +10822,7 @@ GameObject:
   - component: {fileID: 2010202598}
   - component: {fileID: 2010202597}
   - component: {fileID: 2010202596}
+  - component: {fileID: 2134183886}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -11527,6 +11531,49 @@ Transform:
   - {fileID: 2010202595}
   m_Father: {fileID: 1083471948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2134183886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010202594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091ac2a66ed4c040a7bb645bcc7a2fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Head_bob_system
+  playerRoot: {fileID: 1083471948}
+  movementScript: {fileID: 1083471949}
+  pitchIndependentTranslation: 1
+  strideFrequency: 1.325
+  verticalAmount: 0.0475
+  lateralAmount: 0.0542
+  referenceSpeed: 5.32
+  speedSmoothing: 8
+  teleportRejectSpeed: 20
+  airborneFadeTime: 0.12
+  rollAmount: 0.4
+  nodAmount: 0.25
+  stiffness: 180
+  damping: 22
+  landImpulse: 0.9
+  landReferenceFallSpeed: 8
+  footstepImpulse: 0.05
+  footstepMinSpeedFactor: 0.15
+  landingDebounce: 0.08
+  breathFrequency: 0.25
+  breathAmount: 0.006
+  swayAmount: 0.004
+  swaySmoothing: 9
+  swayMaxOffset: 0.015
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  groundCheckDistance: 0.25
+  groundProbeRadiusScale: 0.9
+  fallbackProbeRadius: 0.4
+  fallbackFeetLocalY: 0
 --- !u!1 &2141244200
 GameObject:
   m_ObjectHideFlags: 0
@@ -12839,7 +12886,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8128916c08a24ac479ed3b297c5c9a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::first_Person_Movement
-  speed: 5
+  walkSpeed: 2.6
+  sprintSpeed: 4.6
+  speedAcceleration: 12
+  sprintKey: 304
   mouseSensitivity: 2
   cameraHolder: {fileID: 318219941}
 --- !u!4 &1614989713472471694
