@@ -7637,6 +7637,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 01499f8aca1e20a4b96e32eb4297f88b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b114c86e211f5004bae676826d1eae33, type: 2}
     - target: {fileID: 919132149155446097, guid: 01499f8aca1e20a4b96e32eb4297f88b, type: 3}
       propertyPath: m_Name
       value: DishWasher_low (1)
@@ -8647,6 +8651,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 01499f8aca1e20a4b96e32eb4297f88b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b114c86e211f5004bae676826d1eae33, type: 2}
     - target: {fileID: 919132149155446097, guid: 01499f8aca1e20a4b96e32eb4297f88b, type: 3}
       propertyPath: m_Name
       value: DishWasher_low
