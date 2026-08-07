@@ -57,6 +57,7 @@ public class first_Person_Movement : MonoBehaviour
     private void Update()
     {
         RotatePlayer();
+        ReadMoveInput();
     }
 
     private void FixedUpdate()
@@ -64,15 +65,31 @@ public class first_Person_Movement : MonoBehaviour
         MovePlayer();
     }
 
-    private void MovePlayer()
+    /// <summary>
+    /// Builds the world-space move direction. This runs in Update, immediately after the yaw
+    /// is updated, and NOT in FixedUpdate - Unity runs every FixedUpdate before Update, so
+    /// building the direction there would always use the previous frame's facing, and when the
+    /// framerate drops below the physics rate several FixedUpdates run back to back with no
+    /// Update between them, compounding the error into a visible "walks where I was looking".
+    /// </summary>
+    private void ReadMoveInput()
     {
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveZ = Input.GetAxisRaw("Vertical");
 
-        movement = (transform.right * moveX + transform.forward * moveZ).normalized;
+        Vector3 input = new Vector3(moveX, 0f, moveZ);
+        if (input.sqrMagnitude > 1f) input.Normalize();   // diagonals must not be faster
 
-        IsSprinting = Input.GetKey(sprintKey) && movement.sqrMagnitude > 0f;
+        // Rotate by the yaw accumulator, not by transform.right/transform.forward. The
+        // transform is also written by Rigidbody interpolation between physics steps, so
+        // reading it back is not a reliable source of truth. yRotation always is.
+        movement = Quaternion.Euler(0f, yRotation, 0f) * input;
 
+        IsSprinting = Input.GetKey(sprintKey) && input.sqrMagnitude > 0f;
+    }
+
+    private void MovePlayer()
+    {
         // Ramp rather than snap. Head bob amplitude follows real speed, so an instant
         // speed change would pop the bob.
         float targetSpeed = IsSprinting ? sprintSpeed : walkSpeed;
@@ -96,6 +113,13 @@ public class first_Person_Movement : MonoBehaviour
         // Keeping our own accumulator makes the yaw immune to whatever else touches the
         // transform.
         yRotation += mouseX;
+
+        // Keep the accumulator inside one turn. Left unbounded it grows every time you spin,
+        // and once it is large enough a float can no longer resolve a small mouse delta -
+        // look starts quantising after a long session. Wrapping costs nothing and is exact,
+        // because a yaw of x and x + 360 are the same rotation.
+        if (yRotation > 360f) yRotation -= 360f;
+        else if (yRotation < -360f) yRotation += 360f;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
